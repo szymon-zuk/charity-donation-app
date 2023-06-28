@@ -12,5 +12,5 @@ TYPES = [
 class Institution(models.Model):
     name = models.CharField(max_length=64)
     description = models.TextField()
-    type = models.CharField(choices=TYPES)
+    type = models.CharField(choices=TYPES, max_length=2, default=TYPES[0][0])
     categories = models.ManyToManyField(Category)
