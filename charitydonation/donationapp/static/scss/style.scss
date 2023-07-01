@@ -1,20 +1,20 @@
 @import url("https://fonts.googleapis.com/css?family=Merriweather:300,300i,400|Open+Sans:300,400,600&subset=latin-ext");
-@import "vendor/normalize";
+@import "normalize";
 
-@import "partials/mixins";
-@import "partials/variables";
+@import "mixins";
+@import "variables";
 
-@import "modules/base";
-@import "modules/buttons";
-@import "modules/forms";
+@import "base";
+@import "buttons";
+@import "forms";
 
-@import "modules/header";
-@import "modules/navigation";
-@import "modules/stats";
-@import "modules/homepage-sections/steps";
-@import "modules/homepage-sections/about-us";
-@import "modules/homepage-sections/help";
-@import "modules/footer";
+@import "header";
+@import "navigation";
+@import "stats";
+@import "steps";
+@import "about-us";
+@import "help";
+@import "footer";
 
 .login-page {
   display: flex;
@@ -84,7 +84,7 @@
   > .form--steps-container {
     max-width: none;
     padding: 20px 30px 60px;
-    background-image: url(../images/form-bg.jpg);
+    background-image: url(form-bg.jpg);
     background-size: cover;
     background-position: center right;
     min-height: 700px;
@@ -167,11 +167,11 @@
             margin-right: 20px;
 
             &-bag {
-              background-image: url(../images/icon-bag.png);
+              background-image: url(icon-bag.png);
             }
 
             &-hand {
-              background-image: url(../images/icon-hand.png);
+              background-image: url(icon-hand.png);
             }
           }
         }
