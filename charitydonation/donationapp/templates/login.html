@@ -8,14 +8,7 @@
           <li><a href="#">Zaloguj</a></li>
           <li class="highlighted"><a href={% url 'register' %}>Załóż konto</a></li>
         </ul>
-
-        <ul>
-          <li><a href={% url 'landing-page' %}>Start</a></li>
-          <li><a href={% url 'landing-page' %}#steps>O co chodzi?</a></li>
-          <li><a href={% url 'landing-page' %}#about-us>O nas</a></li>
-          <li><a href={% url 'landing-page' %}#help>Fundacje i organizacje</a></li>
-          <li><a href={% url 'landing-page' %}#contact>Kontakt</a></li>
-        </ul>
+          {% include 'menu_links.html' %}
       </nav>
     </header>
 
