@@ -1,6 +1,8 @@
+from django.contrib.auth.models import User
 from django.db import models
 from phone_field import PhoneField
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
+
 
 class Category(models.Model):
     name = models.CharField(max_length=64)
@@ -12,7 +14,7 @@ class Institution(models.Model):
 
     class Type(models.TextChoices):
        FOUNDATION = "FD", _("foundation")
-       NGO = "NGO", _("non-governmental organization")
+       NGO = "NG", _("non-governmental organization")
        LOCAL_FUNDRAISING = "LF", _("local fundraising")
 
     type = models.CharField(choices=Type.choices, default=Type.FOUNDATION, max_length=2)
