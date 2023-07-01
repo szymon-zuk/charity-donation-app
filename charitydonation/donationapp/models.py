@@ -13,9 +13,9 @@ class Institution(models.Model):
     description = models.TextField()
 
     class Type(models.TextChoices):
-       FOUNDATION = "FD", _("foundation")
-       NGO = "NG", _("non-governmental organization")
-       LOCAL_FUNDRAISING = "LF", _("local fundraising")
+        FOUNDATION = "FD", _("foundation")
+        NGO = "NG", _("non-governmental organization")
+        LOCAL_FUNDRAISING = "LF", _("local fundraising")
 
     type = models.CharField(choices=Type.choices, default=Type.FOUNDATION, max_length=2)
     categories = models.ManyToManyField(Category)
