@@ -1,5 +1,10 @@
-from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import View
+from django.views.generic import CreateView
+
+from .forms import RegistrationForm
 from .models import Donation, Institution
 
 
@@ -32,4 +37,20 @@ class Login(View):
 
 class Register(View):
     def get(self, request):
-        return render(request, 'register.html')
+        form = RegistrationForm()
+        return render(request, 'register.html', {'form': form})
+
+    def post(self, request):
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            name = form.cleaned_data['name']
+            surname = form.cleaned_data['surname']
+            username = email  # Przyjmowanie emaila jako nazwy użytkownika
+            user = User.objects.create_user(username=username, email=email, password=password)
+            user.first_name = name
+            user.last_name = surname
+            user.save()
+            return redirect('login')
+        return render(request, 'register.html', {'form': form})
