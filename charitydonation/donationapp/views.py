@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -71,3 +71,8 @@ class Register(View):
             user.save()
             return redirect("login")
         return render(request, "register.html", {"form": form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("landing-page")
