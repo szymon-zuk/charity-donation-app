@@ -14,16 +14,16 @@ class RegistrationForm(forms.ModelForm):
     class Meta:
         model = User
         fields = [
-            'name',
-            'surname',
-            'email',
-            'password',
-            'password2',
+            "name",
+            "surname",
+            "email",
+            "password",
+            "password2",
         ]
         labels = {
-            'name': 'Imię',
-            'surname': "Nazwisko",
-            'email': "E-mail",
-            'password': "Hasło",
-            'password2': "Powtórz hasło"
+            "name": "Imię",
+            "surname": "Nazwisko",
+            "email": "E-mail",
+            "password": "Hasło",
+            "password2": "Powtórz hasło",
         }
