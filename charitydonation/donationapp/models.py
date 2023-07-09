@@ -7,6 +7,9 @@ from django.utils.translation import gettext as _
 class Category(models.Model):
     name = models.CharField(max_length=64)
 
+    def __str__(self):
+        return self.name
+
 
 class Institution(models.Model):
     name = models.CharField(max_length=64)
@@ -19,6 +22,9 @@ class Institution(models.Model):
 
     type = models.CharField(choices=Type.choices, default=Type.FOUNDATION, max_length=2)
     categories = models.ManyToManyField(Category)
+
+    def __str__(self):
+        return self.name
 
 
 class Donation(models.Model):
@@ -33,3 +39,6 @@ class Donation(models.Model):
     pick_up_time = models.TimeField(auto_now_add=True)
     pick_up_comment = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.address
