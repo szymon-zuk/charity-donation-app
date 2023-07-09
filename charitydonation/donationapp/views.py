@@ -28,6 +28,9 @@ class LandingPage(View):
 
 
 class AddDonation(LoginRequiredMixin, View):
+    login_url = reverse_lazy("login")
+    redirect_field_name = "next"
+
     def get(self, request):
         categories = Category.objects.all()
         institutions = Institution.objects.all()
