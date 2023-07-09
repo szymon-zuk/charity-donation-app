@@ -1,12 +1,13 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView
 
-from .forms import RegistrationForm, LoginForm
-from .models import Donation, Institution
+from .forms import RegistrationForm, LoginForm, DonationForm
+from .models import Donation, Institution, Category
 
 
 class LandingPage(View):
@@ -26,9 +27,42 @@ class LandingPage(View):
         return render(request, "index.html", context)
 
 
-class AddDonation(View):
+class AddDonation(LoginRequiredMixin, View):
+    login_url = reverse_lazy("login")
+    redirect_field_name = "next"
+
     def get(self, request):
-        return render(request, "form.html")
+        categories = Category.objects.all()
+        institutions = Institution.objects.all()
+        form = DonationForm()
+        return render(request, 'form.html',
+                      {'categories': categories, 'institutions': institutions, 'form': form})
+
+    def post(self, request):
+        form = DonationForm(request.POST)
+        categories = request.POST['categories']
+        institution = request.POST['institution']
+        if form.is_valid():
+            quantity = form.cleaned_data['quantity']
+            address = form.cleaned_data['address']
+            city = form.cleaned_data['city']
+            zip_code = form.cleaned_data['zip_code']
+            phone_number = form.cleaned_data['phone_number']
+            pick_up_date = form.cleaned_data['pick_up_date']
+            pick_up_time = form.cleaned_data['pick_up_time']
+            pick_up_comment = form.cleaned_data['pick_up_comment']
+            user = request.user.id
+            donation = Donation.objects.create(quantity=quantity, institution_id=institution, address=address,
+                                               city=city, zip_code=zip_code, phone_number=phone_number,
+                                               pick_up_date=pick_up_date, pick_up_time=pick_up_time,
+                                               pick_up_comment=pick_up_comment, user_id=user)
+            donation.categories.add(categories)
+            return render(request, 'form-confirmation.html')
+        else:
+            categories = Category.objects.all()
+            institutions = Institution.objects.all()
+            return render(request, 'form.html',
+                          {'categories': categories, 'institutions': institutions, 'form': form})
 
 
 class Login(View):
