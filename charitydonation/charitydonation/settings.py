@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "donationapp",
-    "phone_field"
+    "phone_field",
 ]
 
 MIDDLEWARE = [
@@ -77,14 +77,14 @@ WSGI_APPLICATION = "charitydonation.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": config("DB_NAME"),
-            "HOST": config("DB_HOST"),
-            "PASSWORD": config("DB_PASSWORD"),
-            "USER": config("DB_USER"),
-            "PORT": config("DB_PORT"),
-        }
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": config("DB_NAME"),
+        "HOST": config("DB_HOST"),
+        "PASSWORD": config("DB_PASSWORD"),
+        "USER": config("DB_USER"),
+        "PORT": config("DB_PORT"),
+    }
 }
 
 
@@ -122,7 +122,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "donationapp/static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
