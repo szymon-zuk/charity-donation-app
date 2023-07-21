@@ -16,7 +16,18 @@
     <div class="slogan--item">
         <h2>Imię: {{ user.first_name }}</h2>
         <h2>Nazwisko: {{ user.last_name }}</h2>
-        <h3>E-mail: {{ user.email }}</h3>
+        <h2>E-mail: {{ user.email }}</h2>
+    </div>
+    <div class="slogan--item">
+        <h2>Twoje dary</h2>
+        {% for donation in donation_list %}
+        <li>Ilość worków: {{ donation.quantity }}</li>
+        <li>Organizacja: {{ donation.institution }}</li>
+        <li>Kategoria: {{ donation.categories }}</li>
+        <li>Data oddania: {{ donation.pick_up_date }}</li>
+        <li>Godzina oddania: {{ donation.pick_up_time }}</li>
+        <li>Komentarz: {{ donation.pick_up_comment }}</li>
+        {% endfor %}
     </div>
 </body>
 {% endblock content %}
