@@ -1,10 +1,12 @@
+from typing import Any, Dict
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import CreateView
+from django.views.generic import ListView
 
 from .forms import RegistrationForm, LoginForm, DonationForm
 from .models import Donation, Institution, Category
@@ -110,3 +112,16 @@ class Register(View):
 def logout_view(request):
     logout(request)
     return redirect("landing-page")
+
+
+class UserView(ListView):
+    model = Donation
+    template_name = "user_page.html"
+
+    def get_queryset(self):
+        queryset = Donation.objects.filter(user=self.request.user)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = User.objects.filter(id=self.request.user.id)
+        return context
